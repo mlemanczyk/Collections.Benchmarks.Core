@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<OutputType>Library</OutputType>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageId>Collections.Benchmarks.Core</PackageId>
+		<PackageVersion>0.0.1</PackageVersion>
+		<Authors>Marek Lemańczyk</Authors>
+		<Company>N/A</Company>
+		<Product>Collections.Benchmarks.Core</Product>
+		<PackageTags>Recyclable Array Pool List Sortable Sort Benchmark Benchmarks Collection Collections</PackageTags>
+		<Description>`Recyclable.Collections.Benchmarks.Core` project is a basic open source framework for performance measurements based on various collection types like `RecyclableList&lt;T&gt;`, `RecyclableLongList&lt;T&gt;`, `List&lt;T&gt;`, `SortableList&lt;T&gt;`, `PriorityQueue&lt;T&gt;` &amp; similar.</Description>
+		<PackageProjectUrl>https://github.com/mlemanczyk/Collections.Benchmarks.Core</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/mlemanczyk/Collections.Benchmarks.Core</RepositoryUrl>
+		<Copyright>Marek Lemańczyk 2023</Copyright>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryType>git</RepositoryType>
+		<PackageReleaseNotes>Initial version.</PackageReleaseNotes>
+		<Platforms>AnyCPU;x64</Platforms>
+		<PackageIconUrl>https://github.com/mlemanczyk/Collections.Benchmarks.Core/logo.png</PackageIconUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE.md" Pack="true" PackagePath="" Link="LICENSE.md">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="..\README.md" Pack="true" PackagePath="" Link="README.md">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BenchmarkDotNet" Version="0.13.9" />
+		<PackageReference Include="Collections.Pooled" Version="1.0.82" />
+		<PackageReference Include="Recyclable.Collections" Version="0.0.6" />
+	</ItemGroup>
+
+</Project>
