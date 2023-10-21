@@ -3,6 +3,6 @@
 
 ## Included
 * `BaselineVsActualBenchmarkBase<T>`
-* `CollectionsBenchmarksBase<T>`
+* `DataDrivenBenchmarksBase<T>`
 * `DataGenerator`
 * `DoNothing`
