@@ -28,6 +28,11 @@ namespace Collections.Benchmarks.Core
 			}
 		}
 
+		protected override string GetTestMethodName(TTestCase? benchmarkType)
+		{
+			return $"{base.GetTestMethodName(benchmarkType)}{MethodNameSuffix}";
+		}
+
 		protected override void PrepareData<T>(T benchmarkType)
 		{
 			Console.WriteLine($"******* PREPARING DATA FOR {benchmarkType} *******");
@@ -88,5 +93,7 @@ namespace Collections.Benchmarks.Core
 			PrepareData(CollectionsBenchmarksSource.Array);
 			base.Setup();
 		}
+
+		public virtual string MethodNameSuffix { get; } = string.Empty;
 	}
 }
