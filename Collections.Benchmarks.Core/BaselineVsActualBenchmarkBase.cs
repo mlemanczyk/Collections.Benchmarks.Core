@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System.Numerics;
+using System.Reflection;
 
 namespace Collections.Benchmarks.Core
 {
@@ -34,18 +35,14 @@ namespace Collections.Benchmarks.Core
 		public virtual int TestObjectCount { get; set; } = 0;
 		public virtual int TestObjectCountForSlowMethods { get; private set; }
 
-		protected static Exception CreateUnknownBenchmarkTypeException<T>(T benchmarkType)
-		{
-			return new InvalidOperationException($"******* UNKNOWN BENCHMARK TYPE {{{benchmarkType}}} *******");
-		}
-
-		protected static Exception CreateMethodNotFoundException(in string methodName, in string? className)
-		{
-			return new MethodAccessException($"******* METHOD {{{methodName}}} NOT FOUND IN CLASS {{{className}}} *******");
-		}
+		protected static Exception CreateUnknownBenchmarkTypeException<T>(T benchmarkType) => new InvalidOperationException($"******* UNKNOWN BENCHMARK TYPE {{{benchmarkType}}} *******");
+		protected static Exception CreateMethodNotFoundException(in string methodName, in string? className) => new MethodAccessException($"******* METHOD {{{methodName}}} NOT FOUND IN CLASS {{{className}}} *******");
 
 		protected virtual void PrepareData<T>(T benchmarkType) { }
-		protected virtual Action? GetTestMethod(TBenchmarkType? benchmarkType) => null;
+		protected virtual Action? GetTestMethod(TBenchmarkType? benchmarkType)
+			=> (Action?)GetType().GetMethod(GetTestMethodName(benchmarkType), BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public)?.CreateDelegate(typeof(Action), this) ?? throw CreateMethodNotFoundException(GetTestMethodName(benchmarkType), GetType().FullName);
+
+		protected virtual string GetTestMethodName(TBenchmarkType? benchmarkType) => $"{benchmarkType}";
 
 		[GlobalCleanup]
 		public virtual void Cleanup()

@@ -5,7 +5,7 @@ using Recyclable.Collections;
 namespace Collections.Benchmarks.Core
 {
 	[MemoryDiagnoser]
-	public class CollectionsBenchmarksBase<TBenchmarkType> : BaselineVsActualBenchmarkBase<TBenchmarkType>
+	public class DataDrivenBenchmarksBase<TTestCase> : BaselineVsActualBenchmarkBase<TTestCase>
 	{
 		protected int[]? _testObjects;
 		protected int[] TestObjects => _testObjects ?? throw new NullReferenceException("Something is wrong and the field is not initialized");
@@ -62,7 +62,7 @@ namespace Collections.Benchmarks.Core
 
 			base.PrepareData(benchmarkType);
 		}
-
+		
 		public override void Cleanup()
 		{
 			Console.WriteLine("******* GLOBAL CLEANUP *******");
